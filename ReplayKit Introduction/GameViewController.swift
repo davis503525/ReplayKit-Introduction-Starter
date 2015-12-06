@@ -127,7 +127,7 @@ class GameViewController: UIViewController {
             }
         }
     }
-    
+
     func fireButtonTouchedDown(sender: UIButton) {
         self.particleSystem.birthRate = 455
     }
