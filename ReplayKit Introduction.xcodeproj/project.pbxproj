@@ -8,22 +8,22 @@
 
 /* Begin PBXBuildFile section */
 		6082C9511C13C877001C560E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6082C9501C13C877001C560E /* AppDelegate.swift */; };
-		6082C9531C13C877001C560E /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 6082C9521C13C877001C560E /* art.scnassets */; };
 		6082C9551C13C877001C560E /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6082C9541C13C877001C560E /* GameViewController.swift */; };
 		6082C9581C13C877001C560E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6082C9561C13C877001C560E /* Main.storyboard */; };
 		6082C95A1C13C877001C560E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6082C9591C13C877001C560E /* Assets.xcassets */; };
 		6082C95D1C13C877001C560E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6082C95B1C13C877001C560E /* LaunchScreen.storyboard */; };
+		6082C9661C13C96B001C560E /* Fire.scnp in Resources */ = {isa = PBXBuildFile; fileRef = 6082C9641C13C96B001C560E /* Fire.scnp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		6082C94D1C13C877001C560E /* ReplayKit Introduction.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ReplayKit Introduction.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6082C9501C13C877001C560E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		6082C9521C13C877001C560E /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
 		6082C9541C13C877001C560E /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		6082C9571C13C877001C560E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6082C9591C13C877001C560E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6082C95C1C13C877001C560E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6082C95E1C13C877001C560E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6082C9641C13C96B001C560E /* Fire.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; path = Fire.scnp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,8 +57,8 @@
 			isa = PBXGroup;
 			children = (
 				6082C9501C13C877001C560E /* AppDelegate.swift */,
-				6082C9521C13C877001C560E /* art.scnassets */,
 				6082C9541C13C877001C560E /* GameViewController.swift */,
+				6082C9641C13C96B001C560E /* Fire.scnp */,
 				6082C9561C13C877001C560E /* Main.storyboard */,
 				6082C9591C13C877001C560E /* Assets.xcassets */,
 				6082C95B1C13C877001C560E /* LaunchScreen.storyboard */,
@@ -125,9 +125,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6082C9531C13C877001C560E /* art.scnassets in Resources */,
 				6082C95D1C13C877001C560E /* LaunchScreen.storyboard in Resources */,
 				6082C95A1C13C877001C560E /* Assets.xcassets in Resources */,
+				6082C9661C13C96B001C560E /* Fire.scnp in Resources */,
 				6082C9581C13C877001C560E /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -11,94 +11,82 @@ import QuartzCore
 import SceneKit
 
 class GameViewController: UIViewController {
+    
+    var particleSystem: SCNParticleSystem!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // create a new scene
-        let scene = SCNScene(named: "art.scnassets/ship.scn")!
+        let scene = SCNScene()
         
-        // create and add a camera to the scene
         let cameraNode = SCNNode()
         cameraNode.camera = SCNCamera()
         scene.rootNode.addChildNode(cameraNode)
-        
-        // place the camera
         cameraNode.position = SCNVector3(x: 0, y: 0, z: 15)
         
-        // create and add a light to the scene
         let lightNode = SCNNode()
         lightNode.light = SCNLight()
         lightNode.light!.type = SCNLightTypeOmni
         lightNode.position = SCNVector3(x: 0, y: 10, z: 10)
         scene.rootNode.addChildNode(lightNode)
         
-        // create and add an ambient light to the scene
         let ambientLightNode = SCNNode()
         ambientLightNode.light = SCNLight()
         ambientLightNode.light!.type = SCNLightTypeAmbient
         ambientLightNode.light!.color = UIColor.darkGrayColor()
         scene.rootNode.addChildNode(ambientLightNode)
         
-        // retrieve the ship node
-        let ship = scene.rootNode.childNodeWithName("ship", recursively: true)!
+        self.particleSystem = SCNParticleSystem(named: "Fire", inDirectory: nil)!
+        self.particleSystem.birthRate = 0
+        let node = SCNNode()
+        node.addParticleSystem(self.particleSystem)
+        scene.rootNode.addChildNode(node)
         
-        // animate the 3d object
-        ship.runAction(SCNAction.repeatActionForever(SCNAction.rotateByX(0, y: 2, z: 0, duration: 1)))
-        
-        // retrieve the SCNView
         let scnView = self.view as! SCNView
-        
-        // set the scene to the view
         scnView.scene = scene
-        
-        // allows the user to manipulate the camera
         scnView.allowsCameraControl = true
-        
-        // show statistics such as fps and timing information
-        scnView.showsStatistics = true
-        
-        // configure the view
         scnView.backgroundColor = UIColor.blackColor()
-        
-        // add a tap gesture recognizer
-        let tapGesture = UITapGestureRecognizer(target: self, action: "handleTap:")
-        scnView.addGestureRecognizer(tapGesture)
     }
     
-    func handleTap(gestureRecognize: UIGestureRecognizer) {
-        // retrieve the SCNView
-        let scnView = self.view as! SCNView
+    override func viewDidAppear(animated: Bool) {
+        let recordingButton = UIButton(type: .System)
+        recordingButton.setTitle("Start recording", forState: .Normal)
+        recordingButton.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 50)
         
-        // check what nodes are tapped
-        let p = gestureRecognize.locationInView(scnView)
-        let hitResults = scnView.hitTest(p, options: nil)
-        // check that we clicked on at least one object
-        if hitResults.count > 0 {
-            // retrieved the first clicked object
-            let result: AnyObject! = hitResults[0]
-            
-            // get its material
-            let material = result.node!.geometry!.firstMaterial!
-            
-            // highlight it
-            SCNTransaction.begin()
-            SCNTransaction.setAnimationDuration(0.5)
-            
-            // on completion - unhighlight
-            SCNTransaction.setCompletionBlock {
-                SCNTransaction.begin()
-                SCNTransaction.setAnimationDuration(0.5)
-                
-                material.emission.contents = UIColor.blackColor()
-                
-                SCNTransaction.commit()
-            }
-            
-            material.emission.contents = UIColor.redColor()
-            
-            SCNTransaction.commit()
+        let fireButton = UIButton(type: .Custom)
+        fireButton.frame = CGRect(x: 0, y: 0, width: 70, height: 70)
+        fireButton.backgroundColor = UIColor.greenColor()
+        fireButton.clipsToBounds = true
+        fireButton.layer.cornerRadius = 35.0
+        fireButton.addTarget(self, action: "fireButtonTouchedDown:", forControlEvents: .TouchDown)
+        fireButton.addTarget(self, action: "fireButtonTouchedUp:", forControlEvents: .TouchUpInside)
+        fireButton.addTarget(self, action: "fireButtonTouchedUp:", forControlEvents: .TouchUpOutside)
+        fireButton.frame.origin.y = self.view.frame.height - 78
+        fireButton.center.x = self.view.center.x
+        
+        self.addButtons([recordingButton, fireButton])
+    }
+    
+    func addButtons(buttons: [UIButton]) {
+        for button in buttons {
+            self.view.addSubview(button)
         }
+    }
+    
+    func startRecording(sender: UIButton) {
+        
+    }
+    
+    func stopRecording(sender: UIButton) {
+        
+    }
+    
+    func fireButtonTouchedDown(sender: UIButton) {
+        self.particleSystem.birthRate = 455
+    }
+    
+    func fireButtonTouchedUp(sender: UIButton) {
+        self.particleSystem.birthRate = 0
     }
     
     override func shouldAutorotate() -> Bool {
