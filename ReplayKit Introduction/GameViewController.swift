@@ -50,7 +50,7 @@ class GameViewController: UIViewController {
     
     override func viewDidAppear(animated: Bool) {
         let recordingButton = UIButton(type: .System)
-        recordingButton.setTitle("Start recording", forState: .Normal)
+        recordingButton.setTitle("Start Recording", forState: .Normal)
         recordingButton.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 50)
         recordingButton.addTarget(self, action: "startRecording:", forControlEvents: .TouchUpInside)
         
