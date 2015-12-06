@@ -52,6 +52,7 @@ class GameViewController: UIViewController {
         let recordingButton = UIButton(type: .System)
         recordingButton.setTitle("Start recording", forState: .Normal)
         recordingButton.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 50)
+        recordingButton.addTarget(self, action: "startRecording:", forControlEvents: .TouchUpInside)
         
         let fireButton = UIButton(type: .Custom)
         fireButton.frame = CGRect(x: 0, y: 0, width: 70, height: 70)
@@ -71,14 +72,6 @@ class GameViewController: UIViewController {
         for button in buttons {
             self.view.addSubview(button)
         }
-    }
-    
-    func startRecording(sender: UIButton) {
-        
-    }
-    
-    func stopRecording(sender: UIButton) {
-        
     }
     
     func fireButtonTouchedDown(sender: UIButton) {
