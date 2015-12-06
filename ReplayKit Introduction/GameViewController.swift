@@ -9,12 +9,10 @@
 import UIKit
 import QuartzCore
 import SceneKit
-import ReplayKit
 
 class GameViewController: UIViewController {
-    
+
     var particleSystem: SCNParticleSystem!
-    var buttonWindow: UIWindow!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,63 +69,11 @@ class GameViewController: UIViewController {
     }
     
     func addButtons(buttons: [UIButton]) {
-        self.buttonWindow = UIWindow(frame: self.view.frame)
-        self.buttonWindow.rootViewController = HiddenStatusBarViewController()
         for button in buttons {
-            self.buttonWindow.rootViewController?.view.addSubview(button)
-        }
-        
-        self.buttonWindow.makeKeyAndVisible()
-    }
-    
-    func startRecording(sender: UIButton) {
-        if RPScreenRecorder.sharedRecorder().available {
-            RPScreenRecorder.sharedRecorder().startRecordingWithMicrophoneEnabled(true, handler: { (error: NSError?) -> Void in
-                if error == nil { // Recording has started
-                    sender.removeTarget(self, action: "startRecording:", forControlEvents: .TouchUpInside)
-                    sender.addTarget(self, action: "stopRecording:", forControlEvents: .TouchUpInside)
-                    sender.setTitle("Stop Recording", forState: .Normal)
-                    sender.setTitleColor(UIColor.redColor(), forState: .Normal)
-                } else {
-                    // Handle error
-                }
-            })
-        } else {
-            // Hide UI used for recording
+            self.view.addSubview(button)
         }
     }
     
-    func stopRecording(sender: UIButton) {
-        RPScreenRecorder.sharedRecorder().stopRecordingWithHandler { (previewController: RPPreviewViewController?, error: NSError?) -> Void in
-            if previewController != nil {
-                let alertController = UIAlertController(title: "Recording", message: "Do you wish to discard or view your gameplay recording?", preferredStyle: .Alert)
-                
-                let discardAction = UIAlertAction(title: "Discard", style: .Default) { (action: UIAlertAction) in
-                    RPScreenRecorder.sharedRecorder().discardRecordingWithHandler({ () -> Void in
-                        // Executed once recording has successfully been discarded
-                    })
-                }
-                
-                let viewAction = UIAlertAction(title: "View", style: .Default, handler: { (action: UIAlertAction) -> Void in
-                    self.buttonWindow.rootViewController?.presentViewController(previewController!, animated: true, completion: nil)
-                })
-                
-                alertController.addAction(discardAction)
-                alertController.addAction(viewAction)
-                
-                print(self.buttonWindow.rootViewController)
-                self.buttonWindow.rootViewController?.presentViewController(alertController, animated: true, completion: nil)
-                
-                sender.removeTarget(self, action: "stopRecording:", forControlEvents: .TouchUpInside)
-                sender.addTarget(self, action: "startRecording:", forControlEvents: .TouchUpInside)
-                sender.setTitle("Start Recording", forState: .Normal)
-                sender.setTitleColor(UIColor.blueColor(), forState: .Normal)
-            } else {
-                // Handle error
-            }
-        }
-    }
-
     func fireButtonTouchedDown(sender: UIButton) {
         self.particleSystem.birthRate = 455
     }
@@ -143,7 +89,7 @@ class GameViewController: UIViewController {
     override func prefersStatusBarHidden() -> Bool {
         return true
     }
-    
+
     override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
         if UIDevice.currentDevice().userInterfaceIdiom == .Phone {
             return .AllButUpsideDown
@@ -151,10 +97,9 @@ class GameViewController: UIViewController {
             return .All
         }
     }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Release any cached data, images, etc that aren't in use.
     }
-
 }
